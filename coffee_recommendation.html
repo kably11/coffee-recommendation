@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحديد نوع القهوة الأنسب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>حدد تفضيلاتك للحصول على توصية بنوع القهوة الأنسب</h1>
+
+<form id="coffeeForm">
+    <div class="question">
+        <label>1. ما هي النكهة التي تفضلها في قهوتك؟</label><br>
+        <input type="radio" name="flavor" value="fruit_flower"> نكهات فاكهية مع نكهات زهرية (مثل الياسمين والخوخ)<br>
+        <input type="radio" name="flavor" value="fruit_sweet"> نكهات فاكهية مع نكهات حلوة (مثل الأناناس والعنب الأحمر)<br>
+        <input type="radio" name="flavor" value="chocolate_berry"> نكهات شوكولاتة وكاكاو مع توت وجوز<br>
+        <input type="radio" name="flavor" value="chocolate_caramel"> نكهات شوكولاتة وكراميل مع لمسة من الخوخ
+    </div>
+
+    <div class="question">
+        <label>2. ما هو مستوى الكافيين الذي تفضله؟</label><br>
+        <input type="radio" name="caffeine" value="high"> متوسط إلى عالي<br>
+        <input type="radio" name="caffeine" value="medium"> متوسط
+    </div>
+
+    <div class="question">
+        <label>3. ما هو مستوى التعقيد الذي تفضله في نكهة القهوة؟</label><br>
+        <input type="radio" name="complexity" value="balanced"> نكهات غنية ومتوازنة<br>
+        <input type="radio" name="complexity" value="strong"> نكهات مركزة وقوية<br>
+        <input type="radio" name="complexity" value="complex"> نكهات معقدة ومتنوعة<br>
+        <input type="radio" name="complexity" value="fresh"> نكهات طازجة وحيوية
+    </div>
+
+    <button type="button" onclick="getRecommendation()">احصل على التوصية</button>
+</form>
+
+<div class="result" id="result"></div>
+
+<script>
+    function getRecommendation() {
+        var flavor = document.querySelector('input[name="flavor"]:checked').value;
+        var caffeine = document.querySelector('input[name="caffeine"]:checked').value;
+        var complexity = document.querySelector('input[name="complexity"]:checked').value;
+
+        var recommendation = "";
+
+        if (flavor === "chocolate_caramel" && caffeine === "medium" && complexity === "balanced") {
+            recommendation = "نوصي بتجربة كوستا ريكا بيدرا التا | Costa Rica Piedra Alta";
+        } else if (flavor === "fruit_sweet" && caffeine === "high" && complexity === "fresh") {
+            recommendation = "نوصي بتجربة كولومبيا إل بيونتي | Colombia El Puente";
+        } else if (flavor === "fruit_flower" && caffeine === "medium" && complexity === "complex") {
+            recommendation = "نوصي بتجربة أثيوبيا همبيلا | Ethiopia Hambela";
+        } else if (flavor === "chocolate_berry" && caffeine === "high" && complexity === "strong") {
+            recommendation = "نوصي بتجربة كولومبيا هويلا | Colombia Huila";
+        } else {
+            recommendation = "لم نتمكن من تحديد نوع القهوة المناسب بناءً على التفضيلات المدخلة.";
+        }
+
+        document.getElementById('result').innerText = recommendation;
+    }
+</script>
+
+</body>
+</html>
